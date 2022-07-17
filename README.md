@@ -1,5 +1,5 @@
 # GameData
-Separate the logic!
+Separate logic
 
 ## How to use
 Add new date 
