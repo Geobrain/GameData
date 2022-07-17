@@ -12,9 +12,9 @@ namespace AppData
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static object Data(this string key)
     {
-      for (var index = 0; index < gameData.array.Length; index++)
+      for (var index = 0; index < gameData.Length; index++)
       {
-        var data = gameData.array[index];
+        var data = gameData[index];
         if (data.Equals(key))
         {
           return data.obj;
@@ -28,8 +28,8 @@ namespace AppData
 
   public sealed class ArrayGameDates
   {
-    public ObjectData[] array;
-    public int length;
+    private ObjectData[] array;
+    public int Length;
 
     public ref ObjectData this[int index]
     {
@@ -37,21 +37,21 @@ namespace AppData
       get => ref array[index];
     }
 
-    public ArrayGameDates(int cap = 0)
+    public ArrayGameDates()
     {
-      array = new ObjectData[cap > 0 ? cap : 5];
-      length = 0;
+      array = new ObjectData[50];
+      Length = 0;
     }
 
     [Il2CppSetOption(Option.NullChecks | Option.ArrayBoundsChecks, false)]
     public void Add<T>(string key) where T : new()
     {
-      if (length >= array.Length)
+      if (Length >= array.Length)
       {
-        Array.Resize(ref array, length << 1);
+        Array.Resize(ref array, Length << 1);
       }
 
-      array[length++] = new ObjectData(key, new T());
+      array[Length++] = new ObjectData(key, new T());
     }
   }
 
