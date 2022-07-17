@@ -1,5 +1,5 @@
 # GameData
-Separate logic
+Separate logic and don't use channels
 
 ## How to use
 Add new date 
