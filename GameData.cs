@@ -5,7 +5,7 @@ using Unity.IL2CPP.CompilerServices;
 
 internal static partial class GameData
 {
-  public static ArrayGameDates gameData = new ();
+  internal static ArrayGameDates gameData = new ();
 }
 
 
