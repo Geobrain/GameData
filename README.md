@@ -11,7 +11,7 @@ public sealed class FloatData
 }
 
 
-public static partial class DataHelper
+public static partial class GameDataHelper
 {
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   public static FloatData FloatData(this string key) => (FloatData) key.Data();
@@ -21,24 +21,24 @@ public static partial class DataHelper
 Add new key for date
 
 ```csharp
-public partial class GameDataKey
+public static partial class GameDataKey
 {
-  public static readonly string LEVEL_TIME = "LEVEL_TIME";
+  public static readonly string LevelTime = "LevelTime";
 }
 
-internal static partial class GameData
+public static partial class GameData
 {
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-  static void SetFloatData()
+  internal static void SetLevelTime()
   {
-    GameDate.gameData.Add<FloatData>(GameDataKey.LEVEL_TIME);
+    GameDate.gameData.Add<FloatData>(GameDataKey.LevelTime);
   }
 }
 ```
 
 Use it in your project!
 ```csharp
-GameDataKey.LEVEL_TIME.FloatData().value = 600f;
+GameDataKey.LevelTime.FloatData().value = 600f;
 ```
 
 ## Code template:
@@ -49,15 +49,15 @@ using UnityEngine;
 using AppData;
 
 
-public partial class GameDataKey
+public static partial class GameDataKey
 {
   public static readonly string ${Key} = "${Key}";
 }
 
-internal static partial class GameData
+public static partial class GameData
 {
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-  static void Set${Date_Type}()
+  internal static void Set${Key}()
   {
     GameDate.gameData.Add<${Date_Type}>("${Key}");
   }
