@@ -41,7 +41,7 @@ Use it in your project!
 GameDataKey.LEVEL_TIME.FloatData().value = 600f;
 ```
 
-## Template
+## Code template:
 ```csharp
 using System;
 using System.Runtime.CompilerServices;
