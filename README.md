@@ -1,5 +1,5 @@
 # Universal date for game entities
-To exchange data between objects in a game session. Separate game logic and don't use channels
+To exchange data between objects in a game session. Separate game logic and don't use channels for ECS
 
 ## How to use
 Add new date 
