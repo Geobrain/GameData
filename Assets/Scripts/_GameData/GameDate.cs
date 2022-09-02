@@ -8,7 +8,7 @@ namespace GameData
 {
   public static class GameDate
   {
-    public static ArrayGameDates gameData = new ArrayGameDates();
+    private static ArrayGameDates gameData = new ArrayGameDates();
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void AddData<T>(this string key) where T : new() => gameData.Add<T>(key);

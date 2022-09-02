@@ -6,26 +6,11 @@ using System.Runtime.CompilerServices;
 namespace GameData
 {
   [Serializable]
-  public sealed class IntData
+  public sealed class IntData : Data<int>
   {
-    private List<Action<int>> callbacks;
-    private int value;
-    public int Value
-    {
-      get => value;
-      set
-      {
-        if (value == this.value) return;
-        foreach (var callback in callbacks) callback.Invoke(value);
-        this.value = value;
-      }
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    protected override bool Equals(int value) => this.value == value;
+    
     public IntData() => callbacks = new List<Action<int>>();
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void AddObserver(Action<int> callback) => callbacks.Add(callback);
   }
 
   public static partial class HelperGameDate

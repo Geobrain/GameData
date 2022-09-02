@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 
 namespace GameData
@@ -10,7 +9,7 @@ namespace GameData
   {
     protected T value;
     protected List<Action<T>> callbacks;
-    public T Value
+    public virtual T Value
     {
       get => value;
       set

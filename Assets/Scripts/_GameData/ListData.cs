@@ -8,12 +8,12 @@ using System.Runtime.CompilerServices;
 namespace GameData
 {
   [Serializable]
-  public sealed class ListData<T> 
+  public sealed class ListData<T> : Data<ObservableCollection<T>>
   {
-    private List<Action<ObservableCollection<T>>> callbacks;
-    private ObservableCollection<T> value;
-    public ObservableCollection<T> Value => value;
-
+    public override ObservableCollection<T> Value => value;
+    
+    protected override bool Equals(ObservableCollection<T> value) => this.value == value;
+    
     public ListData()
     {
       callbacks = new List<Action<ObservableCollection<T>>>();
@@ -24,9 +24,7 @@ namespace GameData
     private void HandleChange(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
     {
       foreach (var callback in callbacks) callback.Invoke(Value);
-    }    
-    
-    public void AddObserver(Action<ObservableCollection<T>> callback) => callbacks.Add(callback);
+    }  
   }
   
   public static partial class HelperGameDate
