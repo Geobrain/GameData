@@ -30,10 +30,10 @@ public class FloatDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    levelTime = key.GetFloatData(); //data cash
+    levelTime = key.GetFloatData(); //data cache
     
     //AddObserver 
-    key.Data<FloatData>().AddObserver(value =>
+    levelTime.AddObserver(value =>
     {
       text.text = value.ToString("F2");
     });
@@ -45,7 +45,7 @@ public class FloatDataExampleManager: MonoBehaviour
 
     if (levelTime.Value > 3f)
     {
-      key.Data<FloatData>().Value = 0; //unboxing
+      levelTime.Value = 0; 
       Instantiate(prefab);
     }
   }

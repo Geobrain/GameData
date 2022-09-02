@@ -32,6 +32,6 @@ namespace GameData
   public static partial class HelperGameDate
   {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FloatData GetListData(this string key) => key.Data<FloatData>();
+    public static ListData<T> GetListData<T>(this string key) => key.Data<ListData<T>>();
   }
 }

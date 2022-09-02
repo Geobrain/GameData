@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 
 namespace GameData
@@ -17,5 +18,11 @@ namespace GameData
     {
       foreach (var callback in callbacks) callback.Invoke();
     }
+  }
+
+  public static partial class HelperGameDate
+  {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static EventData GetEventData(this string key) => key.Data<EventData>();
   }
 }
