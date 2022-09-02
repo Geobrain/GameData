@@ -25,7 +25,11 @@ namespace GameData
     public BoolData() => callbacks = new List<Action<bool>>();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void AddObserver(Action<bool> callback) => callbacks.Add(callback);
+    public void AddObserver(Action<bool> callback)
+    {
+      callback.Invoke(Value); // send first value
+      callbacks.Add(callback);
+    }
   }
 
   public static partial class HelperGameDate

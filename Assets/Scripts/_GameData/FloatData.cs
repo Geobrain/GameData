@@ -5,27 +5,11 @@ using System.Runtime.CompilerServices;
 
 namespace GameData
 {
-  [Serializable]
-  public sealed class FloatData
+  public sealed class FloatData : Data<float>
   {
-    private List<Action<float>> callbacks;
-    private float value;
-    public float Value
-    {
-      get => value;
-      set
-      {
-        if (value == this.value) return;
-        foreach (var callback in callbacks) callback.Invoke(value);
-        this.value = value;
-      }
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    protected override bool Equals(float value) => this.value == value;
+    
     public FloatData() => callbacks = new List<Action<float>>();
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void AddObserver(Action<float> callback) => callbacks.Add(callback);
   }
 
   public static partial class HelperGameDate
