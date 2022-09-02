@@ -11,7 +11,7 @@ namespace GameData
 
     public EventData() => callbacks = new List<Action>();
 
-    public void AddEventObserver(Action callback) => callbacks.Add(callback);
+    public void AddObserver(Action callback) => callbacks.Add(callback);
 
     public void Invoke()
     {

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public partial class DataKeys
 {
-  [FieldKey(categoryName = "GameData/Level")] public const string Float_LevelTime = "LevelTime";
+  [FieldKey(categoryName = "GameData/Level")] public const string Float_LevelTime = "Float_LevelTime";
 }
 
 public class FloatDataExampleManager: MonoBehaviour

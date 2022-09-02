@@ -462,10 +462,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1906946600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a72ba6b004b834b809c133ef7a88f3, type: 3}
+  m_Script: {fileID: 11500000, guid: f3766aceecd8638489a11409f2adc497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Float_LevelTime
+  key: Event_LevelTime
   text: {fileID: 1786843525}
   prefab: {fileID: 4262470838126378732, guid: f572a2b119c51d347a333abf62997484, type: 3}
 --- !u!4 &1906946602
