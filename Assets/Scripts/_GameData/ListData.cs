@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 
 
 namespace GameData
 {
   [Serializable]
-  public sealed class ListData<T> // and string type
+  public sealed class ListData<T> 
   {
     private List<Action<ObservableCollection<T>>> callbacks;
     private ObservableCollection<T> value;
@@ -27,5 +28,10 @@ namespace GameData
     
     public void AddObserver(Action<ObservableCollection<T>> callback) => callbacks.Add(callback);
   }
-
+  
+  public static partial class HelperGameDate
+  {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static FloatData GetListData(this string key) => key.Data<FloatData>();
+  }
 }

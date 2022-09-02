@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 
 namespace GameData
 {
   public static class GameDate
   {
-    private static ArrayGameDates gameData = new ArrayGameDates();
+    public static ArrayGameDates gameData = new ArrayGameDates();
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void AddData<T>(this string key) where T : new() => gameData.Add<T>(key);
-
-    public static T Data<T>(this string key) => (T) key.Data();
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void RemoveData(this string key) => gameData.Remove(key);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static T Data<T>(this string key) => (T) key.Data();
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static object Data(this string key)
     {
@@ -26,8 +31,12 @@ namespace GameData
         }
       }
 
+#if UNITY_EDITOR
+      Debug.LogError($"No date with key \"{key}\"!");
+#endif
+
       return null;
-    } 
+    }
   }
 
   public sealed class ArrayGameDates
@@ -47,6 +56,7 @@ namespace GameData
       Length = 0;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Add<T>(string key) where T : new()
     {
       if (Length >= array.Length)
@@ -55,6 +65,31 @@ namespace GameData
       }
 
       array[Length++] = new ObjectData(key, new T());
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Remove(string key)
+    {
+      var index = -1;
+
+      for (var i = 0; i < Length; i++)
+      {
+        ref ObjectData val = ref array[i];	
+
+        if (val.key == key)
+        {
+          index = i;
+          break;
+        }
+      }
+			
+      var removed = index > -1;
+      if (removed && index < --Length)
+      {
+        Array.Copy(array, index + 1, array, index, Length - index);
+      }
+        
+      return removed;
     }
   }
 

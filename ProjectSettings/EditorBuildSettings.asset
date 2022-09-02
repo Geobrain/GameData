@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/FloatDataExample.unity
+    guid: c5baa5d24f4aeed44a7d6f2fc4f50ab8
   m_configObjects: {}

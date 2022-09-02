@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 
 namespace GameData
@@ -19,11 +20,18 @@ namespace GameData
       }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public FloatData() => callbacks = new List<Action<float>>();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void AddObserver(Action<float> callback) => callbacks.Add(callback);
   }
 
+  public static partial class HelperGameDate
+  {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static FloatData GetFloatData(this string key) => key.Data<FloatData>();
+  }
 }
 
 

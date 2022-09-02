@@ -1,5 +1,5 @@
 # Universal date for game entities
-To exchange data between objects in a game session. Separate game logic and don't use channels for ECS
+To exchange data between objects in a game session. Separate game logic and don't use channels.
 
 ## How to use
 Add new date 
@@ -19,9 +19,17 @@ Add new date
       }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public FloatData() => callbacks = new List<Action<float>>();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void AddObserver(Action<float> callback) => callbacks.Add(callback);
+  }
+
+  public static partial class HelperGameDate
+  {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static FloatData GetFloatData(this string key) => key.Data<FloatData>();
   }
 ```
 
@@ -58,41 +66,4 @@ add observer
       text.text = value.ToString("F2");
     });
   }
-```
-
-## Code template:
-```csharp
-using System;
-using System.Runtime.CompilerServices;
-using UnityEngine;
-using AppData;
-
-
-public static partial class GameDataKey
-{
-  public static readonly string ${Key} = "${Key}";
-}
-
-public static partial class GameData
-{
-  [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-  internal static void Set${Key}()
-  {
-    GameDate.gameData.Add<${Date_Type}>("${Key}");
-  }
-}
-
-
-[Serializable]
-public sealed class ${Date_Type}
-{
-  public ${Value_Type} value;
-}
-
-
-public static partial class DataHelper
-{
-  [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  public static ${Date_Type} ${Date_Type}(this string key) => (${Date_Type}) key.Data();
-}
 ```
