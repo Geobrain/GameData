@@ -8,20 +8,20 @@ using UnityEngine;
 
 public partial class DataKeys
 {
-  [FieldKey(categoryName = "GameData/Level")] public const string Event_LevelTime = "Event_LevelTime";
+  [FieldKey(categoryName = "GameData/Level")] public const string Bool_LevelTime = "Bool_LevelTime";
 }
 
-public class EventDataExampleManager: MonoBehaviour
+public class BoolDataExampleManager: MonoBehaviour
 {
   [KeyFilter(typeof(DataKeys))] public string key;
   public TextMeshProUGUI text;
   public GameObject prefab;
   private float levelTime;
-  private EventData eventData;
+  private BoolData boolData;
 
   private void OnEnable()
   {
-    key.AddData<EventData>();
+    key.AddData<BoolData>();
   }
 
   private void OnDisable()
@@ -33,12 +33,12 @@ public class EventDataExampleManager: MonoBehaviour
   {
     text.text = "";
     levelTime = 0;
-    eventData = key.GetEventData(); //data cache
+    boolData = key.GetBoolData(); //data cache
       
     //AddObserver 
-    eventData.AddObserver(() =>
+    boolData.AddObserver(value =>
     {
-      text.text = "Event!";
+      text.text = $"{value}";
     });
   }
 
@@ -46,7 +46,7 @@ public class EventDataExampleManager: MonoBehaviour
   {
     if (levelTime > 2f && levelTime < 3f) //you can't write code like that))
     {
-      text.text = "";
+      boolData.Value = false;
     }
 
     levelTime += Time.deltaTime;
@@ -54,7 +54,7 @@ public class EventDataExampleManager: MonoBehaviour
     if (levelTime > 4f)
     {
       levelTime = 0;
-      eventData.Invoke(); 
+      boolData.Value = true;
       Instantiate(prefab);
     }
   }

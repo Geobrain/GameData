@@ -6,11 +6,11 @@ using System.Runtime.CompilerServices;
 namespace GameData
 {
   [Serializable]
-  public sealed class FloatData
+  public sealed class BoolData
   {
-    private List<Action<float>> callbacks;
-    private float value;
-    public float Value
+    private List<Action<bool>> callbacks;
+    private bool value;
+    public bool Value
     {
       get => value;
       set
@@ -22,16 +22,16 @@ namespace GameData
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public FloatData() => callbacks = new List<Action<float>>();
+    public BoolData() => callbacks = new List<Action<bool>>();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void AddObserver(Action<float> callback) => callbacks.Add(callback);
+    public void AddObserver(Action<bool> callback) => callbacks.Add(callback);
   }
 
   public static partial class HelperGameDate
   {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FloatData GetFloatData(this string key) => key.Data<FloatData>();
+    public static BoolData GetBoolData(this string key) => key.Data<BoolData>();
   }
 }
 

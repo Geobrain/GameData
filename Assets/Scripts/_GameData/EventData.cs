@@ -9,7 +9,7 @@ namespace GameData
   public sealed class EventData
   {
     private List<Action> callbacks;
-
+    
     public EventData() => callbacks = new List<Action>();
 
     public void AddObserver(Action callback) => callbacks.Add(callback);
