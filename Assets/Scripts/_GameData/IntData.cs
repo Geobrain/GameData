@@ -8,7 +8,7 @@ namespace GameData
   [Serializable]
   public sealed class IntData : Data<int>
   {
-    protected override bool Equals(int value) => Value == value;
+    protected override bool Equals(int value) => this.value == value;
   }
 
   public static partial class GameDate

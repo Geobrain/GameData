@@ -33,7 +33,7 @@ public class EventDataExampleManager: MonoBehaviour
     text.text = "";
     levelTime = 0;
 
-    key.EventData().AddObserver(() =>
+    key.EventData().AddObserver(this, () =>
     {
       text.text = "Event!";
     });

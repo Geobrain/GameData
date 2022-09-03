@@ -51,6 +51,20 @@ namespace GameData
       callbacks = null;
     }
   }
+  
+  
+  [Serializable]
+  public class Callback<TObject, T>
+  {
+    public TObject subscriber;
+    public Action<T> callback;
+
+    public Callback(TObject subscriber, Action<T> callback)
+    {
+      this.subscriber = subscriber;
+      this.callback = callback;
+    }
+  }
 }
 
 
