@@ -30,7 +30,7 @@ public class StringDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    key.StringData().AddObserver(value =>
+    key.StringData().AddObserver(this, value =>
     {
       text.text = value;
     });

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 
 namespace GameData
@@ -8,25 +9,41 @@ namespace GameData
   [Serializable]
   public abstract class Data<T> : IDisposable
   {
-    public T value;
-    protected List<Action<T>> callbacks;
+    protected List<Callback<Object, T>> callbacks = new List<Callback<Object, T>>();
+    protected T value;
+
     public virtual T Value
     {
       get => value;
       set
       {
         if (Equals(value)) return;
-        foreach (var callback in callbacks) callback.Invoke(value);
+        SetCallback(value);
         this.value = value;
+      }
+    }
+
+    protected void SetCallback(T value)
+    {
+      for (var i = callbacks.Count - 1; i >= 0; i--)
+      {
+        if (callbacks[i].subscriber != null)
+        {
+          callbacks[i].callback.Invoke(value);
+        }
+        else
+        {
+          callbacks.Remove(callbacks[i]);
+        }
       }
     }
 
     protected abstract bool Equals(T value);
 
-    public void AddObserver(Action<T> callback)
+    public void AddObserver(Object subscriber, Action<T> callback)
     {
       callback.Invoke(Value); // send first value
-      callbacks.Add(callback);
+      callbacks.Add(new Callback<Object, T>(subscriber, callback));
     }
 
     public virtual void Dispose()

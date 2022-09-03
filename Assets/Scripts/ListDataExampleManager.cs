@@ -32,7 +32,7 @@ public class ListDataExampleManager: MonoBehaviour
   {
     key.ListData<float>().Value.Add(0);
     
-    key.ListData<float>().AddObserver(value =>
+    key.ListData<float>().AddObserver(this, value =>
     {
       text.text = value[0].ToString("F2");
     });

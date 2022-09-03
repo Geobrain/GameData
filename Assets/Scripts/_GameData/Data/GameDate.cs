@@ -114,4 +114,16 @@ namespace GameData
     public bool Equals(string key) => this.key == key;
   }
 
+  [Serializable]
+  public class Callback<Object, T>
+  {
+    public Object subscriber;
+    public Action<T> callback;
+
+    public Callback(Object subscriber, Action<T> callback)
+    {
+      this.subscriber = subscriber;
+      this.callback = callback;
+    }
+  }
 }

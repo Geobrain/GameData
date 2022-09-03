@@ -33,7 +33,7 @@ public class BoolDataExampleManager: MonoBehaviour
     text.text = "";
     levelTime = 0;
 
-    key.BoolData().AddObserver(value =>
+    key.BoolData().AddObserver(this, value =>
     {
       text.text = $"{value}";
     });

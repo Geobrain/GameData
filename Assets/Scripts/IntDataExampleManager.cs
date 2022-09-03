@@ -30,7 +30,7 @@ public class IntDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    key.IntData().AddObserver(value =>
+    key.IntData().AddObserver(this, value =>
     {
       text.text = value.ToString();
     });

@@ -8,9 +8,7 @@ namespace GameData
   [Serializable]
   public sealed class IntData : Data<int>
   {
-    public IntData() => callbacks = new List<Action<int>>();
-    
-    protected override bool Equals(int value) => this.value == value;
+    protected override bool Equals(int value) => Value == value;
   }
 
   public static partial class GameDate

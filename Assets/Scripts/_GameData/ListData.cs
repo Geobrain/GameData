@@ -14,7 +14,6 @@ namespace GameData
     
     public ListData()
     {
-      callbacks = new List<Action<ObservableCollection<T>>>();
       value = new ObservableCollection<T>();
       value.CollectionChanged += HandleChange;
     }  
@@ -30,7 +29,7 @@ namespace GameData
 
     private void HandleChange(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
     {
-      foreach (var callback in callbacks) callback.Invoke(Value);
+      SetCallback(Value);
     }
   }
   

@@ -11,12 +11,7 @@ public class UIController : MonoBehaviour
   
   private void Start()
   {
-    /*key.FloatData().AddObserver2(this, value =>
-    {
-      text.text = value.ToString("F2");
-    });*/
-    
-    key.FloatData().AddObserver3(this, value =>
+    key.FloatData().AddObserver(this, value =>
     {
       text.text = value.ToString("F2");
     });

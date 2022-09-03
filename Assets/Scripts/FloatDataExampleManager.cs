@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameData;
-using TMPro;
 using UnityEngine;
 
 
@@ -14,7 +13,6 @@ public partial class DataKeys
 public class FloatDataExampleManager: MonoBehaviour
 {
   [KeyFilter(typeof(DataKeys))] public string key;
-  public TextMeshProUGUI text;
   public GameObject prefab;
   public GameObject prefabUI; 
 
@@ -26,14 +24,6 @@ public class FloatDataExampleManager: MonoBehaviour
   private void OnDisable()
   {
     key.RemoveData();
-  }
-
-  private void Start()
-  {
-    /*key.FloatData().AddObserver2(this, value =>
-    {
-      text.text = value.ToString("F2");
-    });*/
   }
 
   void Update()

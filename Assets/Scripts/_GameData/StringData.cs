@@ -8,7 +8,6 @@ namespace GameData
   [Serializable]
   public sealed class StringData : Data<string>
   {
-    public StringData() => callbacks = new List<Action<string>>();
     protected override bool Equals(string value) => this.value == value;
   }
   
