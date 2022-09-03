@@ -16,6 +16,7 @@ public class FloatDataExampleManager: MonoBehaviour
   [KeyFilter(typeof(DataKeys))] public string key;
   public TextMeshProUGUI text;
   public GameObject prefab;
+  public GameObject prefabUI; 
 
   private void OnEnable()
   {
@@ -29,10 +30,10 @@ public class FloatDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    key.FloatData().AddObserver(value =>
+    /*key.FloatData().AddObserver2(this, value =>
     {
       text.text = value.ToString("F2");
-    });
+    });*/
   }
 
   void Update()
@@ -48,6 +49,11 @@ public class FloatDataExampleManager: MonoBehaviour
     if (Input.GetKeyDown(KeyCode.A))
     {
       key.RemoveData();
+    }
+    
+    if (Input.GetKeyDown(KeyCode.Q))
+    {
+      GameObject.Destroy(prefabUI);
     }
   }
 }

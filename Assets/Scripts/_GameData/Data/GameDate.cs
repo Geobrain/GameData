@@ -52,7 +52,7 @@ namespace GameData
 
     public ArrayGameDates()
     {
-      array = new ObjectData[50];
+      array = new ObjectData[5];
       Length = 0;
     }
 
@@ -63,7 +63,6 @@ namespace GameData
       {
         Array.Resize(ref array, Length << 1);
       }
-
       array[Length++] = new ObjectData(key, new T());
     }
     
@@ -92,7 +91,7 @@ namespace GameData
       }
       
 #if UNITY_EDITOR
-      Debug.LogWarning($"Remove data: \"{key}\"! {Length}");
+      Debug.LogWarning($"Remove value: \"{key}\"! {Length}");
 #endif
         
       return removed;
@@ -114,4 +113,5 @@ namespace GameData
 
     public bool Equals(string key) => this.key == key;
   }
+
 }

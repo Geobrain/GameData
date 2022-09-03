@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 1004411011}
   - component: {fileID: 1004411010}
   - component: {fileID: 1004411009}
+  - component: {fileID: 1004411013}
   m_Layer: 5
   m_Name: GameUIController_Canvas
   m_TagString: Untagged
@@ -303,6 +304,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1004411013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004411008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29c7ec728b21934cb712ae9c992c1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: Float_LevelTime
+  text: {fileID: 1786843525}
 --- !u!1 &1786843523
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +483,7 @@ MonoBehaviour:
   key: Float_LevelTime
   text: {fileID: 1786843525}
   prefab: {fileID: 4262470838126378732, guid: f572a2b119c51d347a333abf62997484, type: 3}
+  prefabUI: {fileID: 1004411008}
 --- !u!4 &1906946602
 Transform:
   m_ObjectHideFlags: 0
