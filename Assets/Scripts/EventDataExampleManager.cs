@@ -17,7 +17,6 @@ public class EventDataExampleManager: MonoBehaviour
   public TextMeshProUGUI text;
   public GameObject prefab;
   private float levelTime;
-  private EventData eventData;
 
   private void OnEnable()
   {
@@ -33,10 +32,8 @@ public class EventDataExampleManager: MonoBehaviour
   {
     text.text = "";
     levelTime = 0;
-    eventData = key.GetEventData(); //data cache
-      
-    //AddObserver 
-    eventData.AddObserver(() =>
+
+    key.EventData().AddObserver(() =>
     {
       text.text = "Event!";
     });
@@ -44,7 +41,7 @@ public class EventDataExampleManager: MonoBehaviour
 
   void Update()
   {
-    if (levelTime > 2f && levelTime < 3f) //you can't write code like that))
+    if (levelTime > 2f && levelTime < 3f) //you can't write code like that
     {
       text.text = "";
     }
@@ -54,8 +51,13 @@ public class EventDataExampleManager: MonoBehaviour
     if (levelTime > 4f)
     {
       levelTime = 0;
-      eventData.Invoke(); 
+      key.EventData().Invoke(); 
       Instantiate(prefab);
+    }
+    
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      key.RemoveData();
     }
   }
 }

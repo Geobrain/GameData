@@ -7,15 +7,15 @@ namespace GameData
 {
   public sealed class FloatData : Data<float>
   {
-    protected override bool Equals(float value) => this.value == value;
-    
     public FloatData() => callbacks = new List<Action<float>>();
+    
+    protected override bool Equals(float value) => this.value == value;
   }
 
-  public static partial class HelperGameDate
+  public static partial class GameDate
   {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FloatData GetFloatData(this string key) => key.Data<FloatData>();
+    public static FloatData FloatData(this string key) => key.Data<FloatData>(); //unboxing!
   }
 }
 

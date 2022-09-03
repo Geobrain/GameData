@@ -17,7 +17,6 @@ public class BoolDataExampleManager: MonoBehaviour
   public TextMeshProUGUI text;
   public GameObject prefab;
   private float levelTime;
-  private BoolData boolData;
 
   private void OnEnable()
   {
@@ -33,10 +32,8 @@ public class BoolDataExampleManager: MonoBehaviour
   {
     text.text = "";
     levelTime = 0;
-    boolData = key.GetBoolData(); //data cache
-      
-    //AddObserver 
-    boolData.AddObserver(value =>
+
+    key.BoolData().AddObserver(value =>
     {
       text.text = $"{value}";
     });
@@ -44,9 +41,9 @@ public class BoolDataExampleManager: MonoBehaviour
 
   void Update()
   {
-    if (levelTime > 2f && levelTime < 3f) //you can't write code like that))
+    if (levelTime > 2f && levelTime < 3f) //you can't write code like that
     {
-      boolData.Value = false;
+      key.BoolData().Value = false;
     }
 
     levelTime += Time.deltaTime;
@@ -54,8 +51,14 @@ public class BoolDataExampleManager: MonoBehaviour
     if (levelTime > 4f)
     {
       levelTime = 0;
-      boolData.Value = true;
+      key.BoolData().Value = true;
       Instantiate(prefab);
     }
+    
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      key.RemoveData();
+    }
+
   }
 }

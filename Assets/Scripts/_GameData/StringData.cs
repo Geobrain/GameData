@@ -8,15 +8,14 @@ namespace GameData
   [Serializable]
   public sealed class StringData : Data<string>
   {
-    protected override bool Equals(string value) => this.value == value;
-    
     public StringData() => callbacks = new List<Action<string>>();
+    protected override bool Equals(string value) => this.value == value;
   }
   
-  public static partial class HelperGameDate
+  public static partial class GameDate
   {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static StringData GetStringData(this string key) => key.Data<StringData>();
+    public static StringData StringData(this string key) => key.Data<StringData>(); //unboxing!
   }
 }
 

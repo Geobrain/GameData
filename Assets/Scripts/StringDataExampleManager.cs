@@ -16,7 +16,6 @@ public class StringDataExampleManager: MonoBehaviour
   [KeyFilter(typeof(DataKeys))] public string key;
   public TextMeshProUGUI text;
   public GameObject prefab;
-  private StringData stringData;
   private float levelTime;
 
   private void OnEnable()
@@ -31,10 +30,7 @@ public class StringDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    stringData = key.GetStringData(); //data cache
-    
-    //AddObserver 
-    stringData.AddObserver(value =>
+    key.StringData().AddObserver(value =>
     {
       text.text = value;
     });
@@ -43,13 +39,18 @@ public class StringDataExampleManager: MonoBehaviour
   void Update()
   {
     levelTime += Time.deltaTime;
-    stringData.Value = levelTime.ToString(); //you can't write code like that))
+    key.StringData().Value = levelTime.ToString(); //warning unboxing!
 
     if (levelTime > 3)
     {
       levelTime = 0;
-      stringData.Value = levelTime.ToString();
+      key.StringData().Value = levelTime.ToString();
       Instantiate(prefab);
+    }
+    
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      key.RemoveData();
     }
   }
 }

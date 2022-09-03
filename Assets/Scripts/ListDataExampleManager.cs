@@ -17,7 +17,6 @@ public class ListDataExampleManager: MonoBehaviour
   [KeyFilter(typeof(DataKeys))] public string key;
   public TextMeshProUGUI text;
   public GameObject prefab;
-  private ListData<float> levelTimes;
 
   private void OnEnable()
   {
@@ -31,11 +30,9 @@ public class ListDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    levelTimes = key.GetListData<float>(); //data cache
-    levelTimes.Value.Add(0);
+    key.ListData<float>().Value.Add(0);
     
-    //AddObserver 
-    levelTimes.AddObserver(value =>
+    key.ListData<float>().AddObserver(value =>
     {
       text.text = value[0].ToString("F2");
     });
@@ -43,12 +40,17 @@ public class ListDataExampleManager: MonoBehaviour
 
   void Update()
   {
-    levelTimes.Value[0] += Time.deltaTime;
+    key.ListData<float>().Value[0] += Time.deltaTime; //warning unboxing!
 
-    if (levelTimes.Value[0] > 3f)
+    if (key.ListData<float>().Value[0] > 3f)
     {
-      levelTimes.Value[0] = 0; 
+      key.ListData<float>().Value[0] = 0; 
       Instantiate(prefab);
+    }
+    
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      key.RemoveData();
     }
   }
 }

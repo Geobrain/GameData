@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace GameData
 {
   [Serializable]
-  public abstract class Data<T>
+  public abstract class Data<T> : IDisposable
   {
-    protected T value;
+    public T value;
     protected List<Action<T>> callbacks;
     public virtual T Value
     {
@@ -26,6 +27,11 @@ namespace GameData
     {
       callback.Invoke(Value); // send first value
       callbacks.Add(callback);
+    }
+
+    public virtual void Dispose()
+    {
+      callbacks = null;
     }
   }
 }

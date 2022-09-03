@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameData
 {
-  public static class GameDate
+  public static partial class GameDate
   {
     private static ArrayGameDates gameData = new ArrayGameDates();
     
@@ -17,7 +17,7 @@ namespace GameData
     public static void RemoveData(this string key) => gameData.Remove(key);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static T Data<T>(this string key) => (T) key.Data();
+    private static T Data<T>(this string key) => (T) key.Data();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static object Data(this string key)
@@ -82,12 +82,18 @@ namespace GameData
           break;
         }
       }
-			
+
+      ((IDisposable) array[index].obj).Dispose();
+
       var removed = index > -1;
       if (removed && index < --Length)
       {
         Array.Copy(array, index + 1, array, index, Length - index);
       }
+      
+#if UNITY_EDITOR
+      Debug.LogWarning($"Remove data: \"{key}\"! {Length}");
+#endif
         
       return removed;
     }

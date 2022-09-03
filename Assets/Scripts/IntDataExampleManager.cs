@@ -16,7 +16,6 @@ public class IntDataExampleManager: MonoBehaviour
   [KeyFilter(typeof(DataKeys))] public string key;
   public TextMeshProUGUI text;
   public GameObject prefab;
-  private IntData intData;
   private float levelTime;
 
   private void OnEnable()
@@ -31,10 +30,7 @@ public class IntDataExampleManager: MonoBehaviour
 
   private void Start()
   {
-    intData = key.GetIntData(); //data cache
-    
-    //AddObserver 
-    intData.AddObserver(value =>
+    key.IntData().AddObserver(value =>
     {
       text.text = value.ToString();
     });
@@ -43,13 +39,18 @@ public class IntDataExampleManager: MonoBehaviour
   void Update()
   {
     levelTime += Time.deltaTime;
-    intData.Value = (int) levelTime;
+    key.IntData().Value = (int) levelTime; //warning unboxing!
 
-    if (intData.Value == 3)
+    if (key.IntData().Value == 3)
     {
       levelTime = 0;
-      intData.Value = 0; 
+      key.IntData().Value = 0; 
       Instantiate(prefab);
+    }
+    
+    if (Input.GetKeyDown(KeyCode.A))
+    {
+      key.RemoveData();
     }
   }
 }

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace GameData
 {
   [Serializable]
-  public sealed class EventData
+  public sealed class EventData : IDisposable
   {
     private List<Action> callbacks;
     
@@ -18,11 +18,16 @@ namespace GameData
     {
       foreach (var callback in callbacks) callback.Invoke();
     }
+
+    public void Dispose()
+    {
+      callbacks = null;
+    }
   }
 
-  public static partial class HelperGameDate
+  public static partial class GameDate
   {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static EventData GetEventData(this string key) => key.Data<EventData>();
+    public static EventData EventData(this string key) => key.Data<EventData>(); //unboxing!
   }
 }
